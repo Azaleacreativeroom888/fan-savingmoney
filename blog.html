@@ -1,120 +1,405 @@
-<!-- blog.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ブログ | 不景気の節約日記</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow-base: #FFFDE7;
+      --yellow-bright: #FFF176;
+      --yellow-accent: #F9A825;
+      --green-deep: #4E7C2F;
+      --green-mid: #6FAB3A;
+      --green-light: #C5E1A5;
+      --green-pale: #F1F8E9;
+      --white: #FFFFFF;
+      --text-dark: #2E4A1A;
+      --text-mid: #5A7A3A;
+      --shadow: 0 3px 12px rgba(78,124,47,0.13);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background-color: var(--yellow-base);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    /* ========== ヘッダー ========== */
+    header {
+      background: var(--green-deep);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .logo-icon { font-size: 1.6rem; }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--yellow-bright);
+    }
+
+    nav { display: flex; gap: 0.3rem; }
+
+    nav a {
+      color: var(--green-light);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      background: var(--yellow-bright);
+      color: var(--green-deep);
+    }
+
+    /* ========== ページヘッダー ========== */
+    .page-header {
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--yellow-bright);
+      margin-bottom: 0.4rem;
+    }
+
+    .page-header p {
+      color: var(--green-light);
+      font-size: 0.9rem;
+    }
+
+    /* ========== レイアウト ========== */
+    .layout {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ========== 記事リスト ========== */
+    .articles { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.7rem;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--green-light);
+      position: relative;
+    }
+
+    /* テイスト別のアクセントライン */
+    .article-card.casual { border-left: 5px solid var(--yellow-accent); }
+    .article-card.info   { border-left: 5px solid var(--green-mid); }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .article-cat {
+      background: var(--green-pale);
+      color: var(--green-deep);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 10px;
+      border: 1px solid var(--green-light);
+    }
+
+    .article-cat.orange {
+      background: #FFF8E1;
+      color: #E65100;
+      border-color: #FFCC80;
+    }
+
+    .article-date {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+    }
+
+    .article-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.7rem;
+      line-height: 1.5;
+    }
+
+    .article-body {
+      font-size: 0.88rem;
+      color: #4a5568;
+      line-height: 1.85;
+      white-space: pre-line;
+    }
+
+    /* ========== サイドバー ========== */
+    .sidebar { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .sidebar-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.3rem;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--green-light);
+    }
+
+    .sidebar-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px dashed var(--green-light);
+    }
+
+    .sidebar-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .sidebar-card ul li a {
+      text-decoration: none;
+      color: var(--text-mid);
+      font-size: 0.83rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+
+    .sidebar-card ul li a:hover {
+      background: var(--green-pale);
+      color: var(--green-deep);
+    }
+
+    .archive-list { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .archive-list li a {
+      font-size: 0.82rem !important;
+    }
+
+    /* ========== フッター ========== */
+    footer {
+      background: var(--green-deep);
+      color: var(--green-light);
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    footer .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--yellow-bright);
+      margin-bottom: 0.8rem;
+    }
+
+    footer nav { justify-content: center; margin-bottom: 1rem; }
+    footer nav a { color: var(--green-light); font-size: 0.85rem; }
+    footer p { font-size: 0.75rem; opacity: 0.7; }
+
+    /* ========== レスポンシブ ========== */
+    @media (max-width: 700px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>節約ブログ</h1>
-  <p>不景気時代を生き抜く日々の記録</p>
-</header>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <span class="logo-icon">🐷</span>
+        <span class="logo-text">不景気の節約日記</span>
+      </a>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="blog.html" class="active">ブログ</a>
+        <a href="column.html">コラム</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
 
-<nav>
-  <ul>
-    <li><a href="index.html">ホーム</a></li>
-    <li><a href="food.html">食費節約</a></li>
-    <li><a href="utility.html">固定費節約</a></li>
-  </ul>
-</nav>
+  <div class="page-header">
+    <h1>📝 節約ブログ</h1>
+    <p>不景気時代を生き抜く日々の記録</p>
+  </div>
 
-<main>
+  <div class="layout">
+    <main class="articles">
 
-  <article>
-    <h2>GWの散財……遊びは終わりだ</h2>
-    <p><small>2026年5月8日</small></p>
-    <p>
-      やばい……<br>
-      旅行に行って、友達と遊んで、GWでお金使って私が自由に使えるお金が<br>
-      今月は残り１万５千円になってしまった！<br>
-      （しかも追加で液タブのケーブルが壊れて新しいのを買って１万円使った）<br>
-      ヤバい！<br>
-      なんとかして１万５千円で生き抜くぞ！！！<br>
-    </p>
-  </article>
+      <article class="article-card casual">
+        <div class="article-meta">
+          <span class="article-cat orange">日記</span>
+          <span class="article-date">2026年5月8日</span>
+        </div>
+        <h2>GWの散財……遊びは終わりだ</h2>
+        <p class="article-body">やばい……
+旅行に行って、友達と遊んで、GWでお金使って私が自由に使えるお金が今月は残り１万５千円になってしまった！
+（しかも追加で液タブのケーブルが壊れて新しいのを買って１万円使った）
+ヤバい！
+なんとかして１万５千円で生き抜くぞ！！！</p>
+      </article>
 
-  <article>
-    <h2>緑茶の価格高騰</h2>
-    <p><small>2026年5月7日</small></p>
-    <p>
-      え！！！！！！！<br>
-      緑茶の価格が1200円！？！？！？！<br>
-      どうやら緑茶が海外で人気がでて、輸出もしてるから価格が高騰してるらしい（claudeで調べた）<br>
-      しばらくうちは紅茶のみになりまーす<br>
-      どっか緑茶が安いスーパーを探したい<br>
-    </p>
-  </article>
+      <article class="article-card casual">
+        <div class="article-meta">
+          <span class="article-cat orange">日記</span>
+          <span class="article-date">2026年5月7日</span>
+        </div>
+        <h2>緑茶の価格高騰</h2>
+        <p class="article-body">え！！！！！！！
+緑茶の価格が1200円！？！？！？！
+どうやら緑茶が海外で人気がでて、輸出もしてるから価格が高騰してるらしい（claudeで調べた）
+しばらくうちは紅茶のみになりまーす
+どっか緑茶が安いスーパーを探したい</p>
+      </article>
 
-  <article>
-    <h2>しんどいけどダイエットだと言い聞かせる</h2>
-    <p><small>2026年5月6日</small></p>
-    <p>
-      遠いスーパーのほうが安いときは遠いところにわざわざ行く<br>
-      たまに体力的にしんどい時があるけどダイエットだと思って……<br>
-      固定費を下げなければいけない<br>
-      って思ったら旦那が買ってきてくれた<br>
-      ありがてぇ<br>
-    </p>
-  </article>
+      <article class="article-card casual">
+        <div class="article-meta">
+          <span class="article-cat orange">日記</span>
+          <span class="article-date">2026年5月6日</span>
+        </div>
+        <h2>しんどいけどダイエットだと言い聞かせる</h2>
+        <p class="article-body">遠いスーパーのほうが安いときは遠いところにわざわざ行く
+たまに体力的にしんどい時があるけどダイエットだと思って……
+固定費を下げなければいけない
+って思ったら旦那が買ってきてくれた
+ありがてぇ</p>
+      </article>
 
-  <article>
-    <h2>友達の母ちゃん</h2>
-    <p><small>2026年5月5日</small></p>
-    <p>
-      「うち実家が金持ちだから～」って自慢してる友達がいるんだが<br>
-      いやいやいやいや！！！　待て待て<br>
-      お前の母ちゃんうちの母ちゃんと一緒の外資の会社やろ！！！<br>
-      （しかも役職はワイの母ちゃんのほうが上なはず……）<br>
-      あと母ちゃんのほうが父ちゃんより稼いでる家庭事情も一緒なのよね<br>
-      うちはドケチ生活を叩きこまれたけど、友達の母親が良い人すぎるのよ……<br>
-    </p>
-  </article>
+      <article class="article-card casual">
+        <div class="article-meta">
+          <span class="article-cat orange">日記</span>
+          <span class="article-date">2026年5月5日</span>
+        </div>
+        <h2>友達の母ちゃん</h2>
+        <p class="article-body">「うち実家が金持ちだから～」って自慢してる友達がいるんだが
+いやいやいやいや！！！　待て待て
+お前の母ちゃんうちの母ちゃんと一緒の外資の会社やろ！！！
+（しかも役職はワイの母ちゃんのほうが上なはず……）
+あと母ちゃんのほうが父ちゃんより稼いでる家庭事情も一緒なのよね
+うちはドケチ生活を叩きこまれたけど、友達の母親が良い人すぎるのよ……</p>
+      </article>
 
-  <article>
-    <h2>【5月】物価高でも食費を抑える方法</h2>
-    <p><small>2026年5月5日</small></p>
-    <p>
-      最近は野菜も電気代も高いですが、もやし・豆腐・鶏むね肉を中心に
-      自炊することで食費をかなり抑えられています。
-      無理をしすぎず、続けられる節約が大事。
-    </p>
-  </article>
+      <article class="article-card info">
+        <div class="article-meta">
+          <span class="article-cat">食費</span>
+          <span class="article-date">2026年5月5日</span>
+        </div>
+        <h2>【5月】物価高でも食費を抑える方法</h2>
+        <p class="article-body">最近は野菜も電気代も高いですが、もやし・豆腐・鶏むね肉を中心に自炊することで食費をかなり抑えられています。
+無理をしすぎず、続けられる節約が大事。</p>
+      </article>
 
-  <article>
-    <h2>電気代節約のためにやったこと</h2>
-    <p><small>2026年5月3日</small></p>
-    <p>
-      エアコン使用を調整し、LED照明と待機電力カットを徹底。
-      小さなことでも積み重ねで家計は変わります。
-    </p>
-  </article>
+      <article class="article-card info">
+        <div class="article-meta">
+          <span class="article-cat">光熱費</span>
+          <span class="article-date">2026年5月3日</span>
+        </div>
+        <h2>電気代節約のためにやったこと</h2>
+        <p class="article-body">エアコン使用を調整し、LED照明と待機電力カットを徹底。
+小さなことでも積み重ねで家計は変わります。</p>
+      </article>
 
-  <article>
-    <h2>100均で買ってよかった節約グッズ</h2>
-    <p><small>2026年5月1日</small></p>
-    <p>
-      保存容器、掃除用品、キッチングッズなど、
-      生活防衛に役立つ商品を紹介。
-    </p>
-  </article>
+      <article class="article-card info">
+        <div class="article-meta">
+          <span class="article-cat">日用品</span>
+          <span class="article-date">2026年5月1日</span>
+        </div>
+        <h2>100均で買ってよかった節約グッズ</h2>
+        <p class="article-body">保存容器、掃除用品、キッチングッズなど、生活防衛に役立つ商品を紹介。</p>
+      </article>
 
-</main>
+    </main>
 
-<aside>
-  <h3>カテゴリー</h3>
-  <ul>
-    <li><a href="food.html">食費節約</a></li>
-    <li><a href="utility.html">光熱費</a></li>
-    <li><a href="householdexpense.html">家計簿</a></li>
-  </ul>
-</aside>
+    <aside class="sidebar">
 
-<footer>
-  <p>&copy; 2026 不景気の節約日記</p>
-</footer>
+      <div class="sidebar-card">
+        <h3>🗂 カテゴリー</h3>
+        <ul>
+          <li><a href="#">🛒 食費節約</a></li>
+          <li><a href="#">💡 光熱費</a></li>
+          <li><a href="#">📔 家計簿</a></li>
+          <li><a href="#">🛍 日用品</a></li>
+          <li><a href="#">📓 日記</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>📅 アーカイブ</h3>
+        <ul class="archive-list">
+          <li><a href="#">2026年5月 (7)</a></li>
+          <li><a href="#">2026年4月</a></li>
+          <li><a href="#">2026年3月</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>🔗 ページ</h3>
+        <ul>
+          <li><a href="column.html">🎨 コラム・イラスト</a></li>
+          <li><a href="about.html">🌸 About</a></li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer>
+    <div class="footer-logo">🐷 不景気の節約日記</div>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog.html">ブログ</a>
+      <a href="column.html">コラム</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p>&copy; 2026 不景気の節約日記</p>
+  </footer>
 
 </body>
 </html>
