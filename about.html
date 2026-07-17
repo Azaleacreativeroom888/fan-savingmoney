@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | 不景気の節約日記</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow-base: #FFFDE7;
+      --yellow-bright: #FFF176;
+      --yellow-accent: #F9A825;
+      --green-deep: #4E7C2F;
+      --green-mid: #6FAB3A;
+      --green-light: #C5E1A5;
+      --green-pale: #F1F8E9;
+      --white: #FFFFFF;
+      --text-dark: #2E4A1A;
+      --text-mid: #5A7A3A;
+      --shadow: 0 3px 12px rgba(78,124,47,0.13);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background-color: var(--yellow-base);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    /* ========== ヘッダー ========== */
+    header {
+      background: var(--green-deep);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .logo-icon { font-size: 1.6rem; }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--yellow-bright);
+    }
+
+    nav { display: flex; gap: 0.3rem; }
+
+    nav a {
+      color: var(--green-light);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      background: var(--yellow-bright);
+      color: var(--green-deep);
+    }
+
+    /* ========== ページヘッダー ========== */
+    .page-header {
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--yellow-bright);
+      margin-bottom: 0.4rem;
+    }
+
+    .page-header p {
+      color: var(--green-light);
+      font-size: 0.9rem;
+    }
+
+    /* ========== メイン ========== */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ========== セクションラベル ========== */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--green-light), transparent);
+    }
+
+    /* ========== プロフィールカード ========== */
+    .profile-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--green-light);
+      padding: 2rem 2rem 1.8rem;
+      display: flex;
+      gap: 1.8rem;
+      align-items: flex-start;
+      border-top: 4px solid var(--green-mid);
+    }
+
+    .profile-avatar {
+      font-size: 4rem;
+      flex-shrink: 0;
+      background: var(--green-pale);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--green-light);
+    }
+
+    .profile-info h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.2rem;
+    }
+
+    .profile-info .profile-sub {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      margin-bottom: 0.9rem;
+    }
+
+    .profile-info p {
+      font-size: 0.88rem;
+      color: #4a5568;
+      line-height: 1.85;
+      white-space: pre-line;
+    }
+
+    /* ========== このサイトについてカード ========== */
+    .about-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--green-light);
+      padding: 1.6rem 1.8rem;
+      border-top: 4px solid var(--yellow-accent);
+    }
+
+    .about-card p {
+      font-size: 0.88rem;
+      color: #4a5568;
+      line-height: 1.9;
+    }
+
+    /* ========== リンクグリッド ========== */
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      text-decoration: none;
+      background: var(--white);
+      border: 1.5px solid var(--green-light);
+      border-radius: var(--radius);
+      padding: 0.9rem 1.1rem;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--green-mid), var(--yellow-accent));
+      border-radius: 4px 0 0 4px;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: var(--green-mid);
+    }
+
+    .link-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--green-pale);
+      border: 1px solid var(--green-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .link-text { flex: 1; min-width: 0; }
+
+    .link-name {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.15rem;
+    }
+
+    .link-desc {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+
+    .link-arrow {
+      font-size: 1.1rem;
+      color: var(--green-light);
+      flex-shrink: 0;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .link-card:hover .link-arrow {
+      color: var(--green-mid);
+      transform: translateX(3px);
+    }
+
+    /* ========== お問い合わせフォーム ========== */
+    .form-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--green-light);
+      padding: 1.8rem 2rem;
+      border-top: 4px solid var(--green-deep);
+    }
+
+    .form-intro {
+      font-size: 0.87rem;
+      color: var(--text-mid);
+      margin-bottom: 1.4rem;
+      line-height: 1.8;
+    }
+
+    .form-group { margin-bottom: 1.1rem; }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .required { color: #e53e3e; }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: var(--yellow-base);
+      border: 1.5px solid var(--green-light);
+      border-radius: 10px;
+      color: var(--text-dark);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.65rem 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: #aac080;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(111,171,58,0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .field-error {
+      display: block;
+      font-size: 0.75rem;
+      color: #e53e3e;
+      margin-top: 0.3rem;
+    }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green-deep);
+      border: none;
+      border-radius: 30px;
+      color: var(--yellow-bright);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.7rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+      box-shadow: 0 3px 10px rgba(78,124,47,0.25);
+    }
+
+    .form-submit:hover {
+      background: var(--green-mid);
+      transform: translateY(-2px);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .form-success {
+      background: var(--green-pale);
+      border: 1.5px solid var(--green-light);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      text-align: center;
+      color: var(--green-deep);
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-success-icon {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-error-global {
+      background: #FFF5F5;
+      border: 1.5px solid #FEB2B2;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      color: #c53030;
+      font-size: 0.84rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ========== 戻るリンク ========== */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      color: var(--text-mid);
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border: 1.5px solid var(--green-light);
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--green-deep);
+      border-color: var(--green-mid);
+      background: var(--green-pale);
+    }
+
+    /* ========== フッター ========== */
+    footer {
+      background: var(--green-deep);
+      color: var(--green-light);
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .footer-notice {
+      font-size: 0.75rem;
+      color: rgba(197,225,165,0.6);
+      line-height: 1.9;
+      max-width: 700px;
+      margin: 0 auto 1rem;
+    }
+
+    footer .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--yellow-bright);
+      margin-bottom: 0.8rem;
+    }
+
+    footer nav { justify-content: center; margin-bottom: 1rem; }
+    footer nav a { color: var(--green-light); font-size: 0.85rem; }
+    footer p.copy { font-size: 0.75rem; opacity: 0.7; }
+
+    /* ========== レスポンシブ ========== */
+    @media (max-width: 600px) {
+      .profile-card { flex-direction: column; align-items: center; text-align: center; }
+      .link-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <span class="logo-icon">🐷</span>
+        <span class="logo-text">不景気の節約日記</span>
+      </a>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="blog.html">ブログ</a>
+        <a href="column.html">コラム</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <h1>🌸 About</h1>
+    <p>管理人とサイトについて</p>
+  </div>
+
+  <main>
+
+    <!-- プロフィール -->
+    <section>
+      <p class="section-label">🌿 プロフィール</p>
+      <div class="profile-card">
+        <div class="profile-avatar">🌸</div>
+        <div class="profile-info">
+          <h2>管理人名</h2>
+          <p class="profile-sub">節約主婦 / イラスト・4コマ描きます</p>
+          <p>ここに自己紹介文を書いてください。
+節約歴・家族構成・趣味など、自由に書き換えてもらえればと思います。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- このサイトについて -->
+    <section>
+      <p class="section-label">📔 このサイトについて</p>
+      <div class="about-card">
+        <p>「不景気の節約日記」は、物価高・不景気の時代を生き抜くための節約記録サイトです。
+食費・光熱費・日用品の節約アイデアをブログに、日々の気づきや4コマ漫画・イラストをコラムに掲載しています。
+完璧な節約じゃなくていい。続けられることが大事、をモットーにゆるゆる更新しています。</p>
+      </div>
+    </section>
+
+    <!-- リンク -->
+    <section>
+      <p class="section-label">🔗 リンク</p>
+      <div class="link-grid">
+
+        <a class="link-card" href="https://rookie.shonenjump.com/users/14728546961183734555" target="_blank" rel="noopener">
+          <div class="link-icon">📚</div>
+          <div class="link-text">
+            <span class="link-name">ジャンプルーキー</span>
+            <span class="link-desc">オリジナル漫画を掲載中</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://daysneo.com/author/Sam333333Sam/" target="_blank" rel="noopener">
+          <div class="link-icon">🌙</div>
+          <div class="link-text">
+            <span class="link-name">DaysNEO</span>
+            <span class="link-desc">漫画掲載サイト</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+          <div class="link-icon">🎨</div>
+          <div class="link-text">
+            <span class="link-name">Pixiv</span>
+            <span class="link-desc">二次創作はこちらに掲載</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+          <div class="link-icon">🦋</div>
+          <div class="link-text">
+            <span class="link-name">Bluesky</span>
+            <span class="link-desc">近況・作品のお知らせ</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+          <div class="link-icon">✒️</div>
+          <div class="link-text">
+            <span class="link-name">カクヨム</span>
+            <span class="link-desc">小説を掲載中</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+          <div class="link-icon">🎬</div>
+          <div class="link-text">
+            <span class="link-name">YouTube（リリポピ）</span>
+            <span class="link-desc">動画チャンネル</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">
+          <div class="link-icon">🌺</div>
+          <div class="link-text">
+            <span class="link-name">Azalea Creative Room</span>
+            <span class="link-desc">メインの創作サイト</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- お問い合わせ -->
+    <section>
+      <p class="section-label">📮 お問い合わせ</p>
+      <div class="form-card">
+        <p class="form-intro">ご質問・ご感想などはこちらからどうぞ。<br>返信に時間をいただく場合があります。</p>
+
+        <div data-fs-success class="form-success" style="display:none;">
+          <span class="form-success-icon">🐷</span>
+          <p>メッセージを送信しました。ありがとうございます！</p>
+        </div>
+
+        <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+        <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+
+          <div class="form-group">
+            <label class="form-label" for="name">お名前</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="名前（任意）">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">メールアドレス <span class="required">※</span></label>
+            <input class="form-input" type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+            <span data-fs-error="email" class="field-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">メッセージ <span class="required">※</span></label>
+            <textarea class="form-textarea" id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+            <span data-fs-error="message" class="field-error"></span>
+          </div>
+
+          <button class="form-submit" type="submit" data-fs-submit-btn>
+            📮 送信する
+          </button>
+
+        </form>
+      </div>
+    </section>
+
+    <a class="back-link" href="index.html">← トップページに戻る</a>
+
+  </main>
+
+  <footer>
+    <div class="footer-logo">🐷 不景気の節約日記</div>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog.html">ブログ</a>
+      <a href="column.html">コラム</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p class="footer-notice">当サイトに掲載されている画像・文章・作品について、AI学習への利用、トレース、無断転載・二次利用を禁止します。</p>
+    <p class="copy">&copy; 2026 不景気の節約日記</p>
+  </footer>
+
+  <script>
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
