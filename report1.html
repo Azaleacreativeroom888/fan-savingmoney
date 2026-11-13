@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成功？失敗？ | おうちの節約ノート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow-base: #FFFDE7;
+      --yellow-bright: #FFF176;
+      --yellow-accent: #F9A825;
+      --green-deep: #4E7C2F;
+      --green-mid: #6FAB3A;
+      --green-light: #C5E1A5;
+      --green-pale: #F1F8E9;
+      --white: #FFFFFF;
+      --text-dark: #2E4A1A;
+      --text-mid: #5A7A3A;
+      --shadow: 0 3px 12px rgba(78,124,47,0.13);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background-color: var(--yellow-base);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    /* ========== ヘッダー ========== */
+    header {
+      background: var(--green-deep);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .logo-icon { font-size: 1.6rem; }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--yellow-bright);
+    }
+
+    nav { display: flex; gap: 0.3rem; }
+
+    nav a {
+      color: var(--green-light);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      background: var(--yellow-bright);
+      color: var(--green-deep);
+    }
+
+    /* ========== ページヘッダー ========== */
+    .page-header {
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--yellow-bright);
+      margin-bottom: 0.4rem;
+    }
+
+    .page-header p {
+      color: var(--green-light);
+      font-size: 0.9rem;
+    }
+
+    /* ========== メイン ========== */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    /* ========== 記事カード ========== */
+    .entry {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--green-light);
+      border-top: 4px solid var(--yellow-accent);
+      padding: 1.6rem 1.8rem 1.8rem;
+    }
+
+    .entry-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .entry-tag {
+      background: var(--green-pale);
+      color: var(--green-deep);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 10px;
+      border: 1px solid var(--green-light);
+    }
+
+    .entry-date {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      margin-left: auto;
+    }
+
+    .entry h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* ========== ①②③ブロック ========== */
+    .step {
+      display: flex;
+      gap: 0.9rem;
+      padding: 1rem 0;
+      border-top: 2px dashed var(--green-light);
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--green-deep);
+      color: var(--yellow-bright);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.1rem;
+    }
+
+    .step-body { flex: 1; min-width: 0; }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.4rem;
+    }
+
+    .step-text {
+      font-size: 0.88rem;
+      color: #4a5568;
+      line-height: 1.9;
+      white-space: pre-line;
+    }
+
+    /* 結果バッジ */
+    .result-badge {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.15rem 0.7rem;
+      border-radius: 10px;
+    }
+
+    .result-badge.success {
+      background: #E8F5E9;
+      color: #2E7D32;
+      border: 1px solid #A5D6A7;
+    }
+
+    .result-badge.fail {
+      background: #FFEBEE;
+      color: #C62828;
+      border: 1px solid #EF9A9A;
+    }
+
+    .result-badge.half {
+      background: #FFF8E1;
+      color: #E65100;
+      border: 1px solid #FFCC80;
+    }
+
+    /* ========== 戻るリンク ========== */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      width: fit-content;
+      text-decoration: none;
+      color: var(--text-mid);
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border: 1.5px solid var(--green-light);
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--green-deep);
+      border-color: var(--green-mid);
+      background: var(--green-pale);
+    }
+
+    /* ========== フッター ========== */
+    footer {
+      background: var(--green-deep);
+      color: var(--green-light);
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    footer .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--yellow-bright);
+      margin-bottom: 0.8rem;
+    }
+
+    footer nav { justify-content: center; margin-bottom: 1rem; }
+    footer nav a { color: var(--green-light); font-size: 0.85rem; }
+    footer p { font-size: 0.75rem; opacity: 0.7; }
+
+    @media (max-width: 600px) {
+      .entry { padding: 1.3rem 1.2rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <span class="logo-icon">🐷</span>
+        <span class="logo-text">おうちの節約ノート</span>
+      </a>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="blog.html">ブログ</a>
+        <a href="column.html" class="active">コラム</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <h1>📋 成功？失敗？</h1>
+    <p>やってみた節約の結果をゆるっと報告します</p>
+  </div>
+
+  <main>
+
+    <!-- 記事1（ダミー） -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-tag">食費</span>
+        <span class="entry-date">2026年5月10日</span>
+      </div>
+      <h2>特売日にまとめ買い＋冷凍保存をやってみた</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">何をしたか</div>
+          <p class="step-text">ここに「何をやったか」を書いてください。
+例：特売日に鶏むね肉を3パックまとめ買いして、小分けにして冷凍した。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">成功？失敗？ <span class="result-badge success">成功</span></div>
+          <p class="step-text">ここに結果を書いてください。
+バッジは「成功」「失敗」「どっちも」の3種類から選べます。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">結果の感想</div>
+          <p class="step-text">ここに感想を書いてください。
+やってみてどうだったか、次はどうするかなど自由に。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 記事2（ダミー） -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-tag">光熱費</span>
+        <span class="entry-date">2026年5月3日</span>
+      </div>
+      <h2>待機電力カットをやってみた</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">何をしたか</div>
+          <p class="step-text">ここに「何をやったか」を書いてください。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">成功？失敗？ <span class="result-badge half">どっちも</span></div>
+          <p class="step-text">ここに結果を書いてください。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">結果の感想</div>
+          <p class="step-text">ここに感想を書いてください。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 記事3（ダミー） -->
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-tag">日用品</span>
+        <span class="entry-date">2026年4月28日</span>
+      </div>
+      <h2>100均の詰め替え用品に切り替えてみた</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">何をしたか</div>
+          <p class="step-text">ここに「何をやったか」を書いてください。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">成功？失敗？ <span class="result-badge fail">失敗</span></div>
+          <p class="step-text">ここに結果を書いてください。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">結果の感想</div>
+          <p class="step-text">ここに感想を書いてください。</p>
+        </div>
+      </div>
+    </article>
+
+    <a class="back-link" href="column.html">← コラムに戻る</a>
+
+  </main>
+
+  <footer>
+    <div class="footer-logo">🐷 おうちの節約ノート</div>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog.html">ブログ</a>
+      <a href="column.html">コラム</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p>&copy; 2026 おうちの節約ノート</p>
+  </footer>
+
+</body>
+</html>
