@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>コラム | 不景気の節約日記</title>
+  <title>コラム | おうちの節約ノート</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
   <style>
@@ -223,6 +223,60 @@
       font-size: 0.9rem;
     }
 
+    /* ========== リンクボックス ========== */
+    .link-box {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: var(--yellow-bright);
+      border: 2px dashed var(--yellow-accent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.3rem 1.6rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .link-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(78,124,47,0.18);
+    }
+
+    .link-box-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .link-box-text { flex: 1; }
+
+    .link-box-label {
+      display: inline-block;
+      background: var(--yellow-accent);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.6rem;
+      border-radius: 8px;
+      margin-bottom: 0.3rem;
+    }
+
+    .link-box-title {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green-deep);
+    }
+
+    .link-box-arrow {
+      font-size: 1.5rem;
+      color: var(--green-deep);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .link-box:hover .link-box-arrow { transform: translateX(4px); }
+
     /* ========== フッター ========== */
     footer {
       background: var(--green-deep);
@@ -254,7 +308,7 @@
     <div class="header-inner">
       <a href="index.html" class="site-logo">
         <span class="logo-icon">🐷</span>
-        <span class="logo-text">不景気の節約日記</span>
+        <span class="logo-text">おうちの節約ノート</span>
       </a>
       <nav>
         <a href="index.html">ホーム</a>
@@ -271,6 +325,16 @@
   </div>
 
   <main>
+
+    <!-- リンクボックス -->
+    <a href="report1.html" class="link-box">
+      <span class="link-box-icon">📋</span>
+      <span class="link-box-text">
+        <span class="link-box-label">特集</span>
+        <span class="link-box-title">成功？失敗？</span>
+      </span>
+      <span class="link-box-arrow">›</span>
+    </a>
 
     <!-- 4コマ -->
     <article class="card yonkoma-card">
@@ -384,14 +448,14 @@
   </main>
 
   <footer>
-    <div class="footer-logo">🐷 不景気の節約日記</div>
+    <div class="footer-logo">🐷 おうちの節約ノート</div>
     <nav>
       <a href="index.html">ホーム</a>
       <a href="blog.html">ブログ</a>
       <a href="column.html">コラム</a>
       <a href="about.html">About</a>
     </nav>
-    <p>&copy; 2026 不景気の節約日記</p>
+    <p>&copy; 2026 おうちの節約ノート</p>
   </footer>
 
 </body>
